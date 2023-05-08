@@ -26,6 +26,12 @@ namespace Moq.Tools.Common
             return _service.GetRequiredService<T>();
         }
 
+        public void AddMock<T>() where T : class
+        {
+            Mock<T> objMock = GetNewMock<T>(GetArgs<T>());
+            _dicMockCache.Add(typeof(T), objMock);
+        }
+
         public void AddMock<T>(Action<Mock<T>> action, params object[] args)
             where T : class
         {
@@ -38,9 +44,7 @@ namespace Moq.Tools.Common
         public void AddMock<T>(Action<Mock<T>> action)
             where T : class
         {
-            var lsTypesContructor = GetConstructorParameterTypes(typeof(T));
-            var lsObjects = lsTypesContructor.Select(GetCache).ToArray();
-            AddMock<T>(action, lsObjects);
+            AddMock(action, GetArgs<T>());
         }
 
         public void ClearMock()
@@ -49,6 +53,13 @@ namespace Moq.Tools.Common
         }
 
         #region [ Private ]
+
+        private object[] GetArgs<T>()
+            where T : class
+        {
+            var lsTypesContructor = GetConstructorParameterTypes(typeof(T));
+            return lsTypesContructor.Select(GetCache).ToArray();
+        }
 
         private Mock<T> GetNewMock<T>(params object[] args)
             where T : class
@@ -83,6 +94,7 @@ namespace Moq.Tools.Common
 
             return parameterTypes;
         }
+
 
         #endregion [ Private ]
     }

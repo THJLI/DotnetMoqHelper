@@ -4,34 +4,28 @@ using Microsoft.Extensions.Hosting;
 using Moq.Tools.Interfaces;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 
 namespace Moq.Tools.Common
 {
-    public abstract class MoqTestBase: IMoqDependecy
+    public abstract class MoqTestBase
     {
-        private IConfiguration _configuration;
         private IHost _host;
         private IMoqDependecy _moqDependecy;
 
         public abstract void ConfigureServices(IServiceCollection services);
 
-        public abstract IDictionary<string, string> InMemoryConfiguration { get; }
-
+        protected abstract void AfterSetup();
+        
         public abstract IConfiguration Configuration { get; }
 
         [OneTimeSetUp]
         protected void Setup()
         {
-            if (InMemoryConfiguration is null && Configuration is null)
-                throw new ArgumentException($"${nameof(InMemoryConfiguration)} And ${nameof(Configuration)}");
-
-            _configuration = Configuration ?? new ConfigurationBuilder()
-                                                    .AddInMemoryCollection(InMemoryConfiguration!)
-                                                        .Build();
-
+            if (Configuration is NotImplementedException || Configuration is null)
+                throw new ArgumentException(nameof(Configuration));
+            
             _host = Host.CreateDefaultBuilder()
-                    .ConfigureAppConfiguration(o => o.AddConfiguration(_configuration))
+                    .ConfigureAppConfiguration(o => o.AddConfiguration(Configuration))
                     .ConfigureServices(s =>
                     {
                         s.AddTransient<IMoqDependecy, MoqDependecy>();
@@ -40,11 +34,17 @@ namespace Moq.Tools.Common
                     .Build();
 
             _moqDependecy = _host.Services.GetRequiredService<IMoqDependecy>();
+            AfterSetup();
         }
 
-        public T Get<T>() where T : notnull
+        public T DepGet<T>() where T : notnull
         {
             return _moqDependecy.Get<T>();
+        }
+
+        public virtual void AddMock<T>() where T : class
+        {
+            _moqDependecy.AddMock<T>(); 
         }
 
         public virtual void AddMock<T>(Action<Mock<T>> action, params object[] args) where T : class
