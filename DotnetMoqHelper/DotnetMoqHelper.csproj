@@ -11,7 +11,6 @@
 		<RepositoryUrl>https://github.com/THJLI/DotnetMoqHelper</RepositoryUrl>
 		<LicenseUrl>https://raw.githubusercontent.com/THJLI/DotnetMoqHelper/master/LICENSE.txt</LicenseUrl>
 		<PackageProjectUrl>https://www.nuget.org/packages/DotnetMoqHelper/</PackageProjectUrl>
-		<PackageLicenseFile>https://raw.githubusercontent.com/THJLI/DotnetMoqHelper/master/LICENSE.txt</PackageLicenseFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
