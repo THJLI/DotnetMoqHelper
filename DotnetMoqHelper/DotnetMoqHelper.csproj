@@ -4,6 +4,14 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
 		<PackageId>DotnetMoqHelper</PackageId>
+		<Authors>Thiago J. Lima</Authors>
+		<Owners>THJLI</Owners>
+		<Description>Project for help developers on NUnit Test, easy and fast to create Moq.</Description>
+		<Tags>NUnit, Moq, C#, dotnet core</Tags>
+		<RepositoryUrl>https://github.com/THJLI/DotnetMoqHelper</RepositoryUrl>
+		<LicenseUrl>https://raw.githubusercontent.com/THJLI/DotnetMoqHelper/master/LICENSE.txt</LicenseUrl>
+		<PackageProjectUrl>https://www.nuget.org/packages/DotnetMoqHelper/</PackageProjectUrl>
+		<PackageLicenseFile>https://raw.githubusercontent.com/THJLI/DotnetMoqHelper/master/LICENSE.txt</PackageLicenseFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

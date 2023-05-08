@@ -29,7 +29,7 @@ namespace DotnetMoqHelper.Common
                     .ConfigureAppConfiguration(o => o.AddConfiguration(Configuration))
                     .ConfigureServices(s =>
                     {
-                        s.AddTransient<IMoqDependecy, MoqDependecy>();
+                        s.AddSingleton<IMoqDependecy, MoqDependecy>();
                         ConfigureServices(s);
                     })
                     .Build();
