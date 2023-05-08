@@ -53,22 +53,7 @@ namespace DotnetMoqHelper.Common
             _dicMockCache.Clear();
         }
 
-        #region [ Private ]
-
-        private object[] GetArgs<T>()
-            where T : class
-        {
-            var lsTypesContructor = GetConstructorParameterTypes(typeof(T));
-            return lsTypesContructor.Select(GetCache).ToArray();
-        }
-
-        private Mock<T> GetNewMock<T>(params object[] args)
-            where T : class
-        {
-            return new Mock<T>(args) { CallBase = true };
-        }
-
-        private object GetCache(Type type)
+        public object GetCacheOrService(Type type)
         {
             try
             {
@@ -82,6 +67,23 @@ namespace DotnetMoqHelper.Common
                 throw;
             }
         }
+
+        #region [ Private ]
+
+        private object[] GetArgs<T>()
+            where T : class
+        {
+            var lsTypesContructor = GetConstructorParameterTypes(typeof(T));
+            return lsTypesContructor.Select(GetCacheOrService).ToArray();
+        }
+
+        private Mock<T> GetNewMock<T>(params object[] args)
+            where T : class
+        {
+            return new Mock<T>(args) { CallBase = true };
+        }
+
+        
 
         private IEnumerable<Type> GetConstructorParameterTypes(Type type)
         {

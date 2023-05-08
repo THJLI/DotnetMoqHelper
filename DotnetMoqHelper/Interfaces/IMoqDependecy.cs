@@ -14,6 +14,8 @@ namespace DotnetMoqHelper.Interfaces
         void AddMock<T>(Action<Mock<T>> action) where T : class;
 
         void ClearMock();
-        
+
+        object GetCacheOrService(Type type);
+
     }
 }
