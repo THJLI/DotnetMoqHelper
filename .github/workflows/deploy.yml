@@ -18,7 +18,7 @@ jobs:
         run: dotnet restore
 
       - name: Build project and create NuGet package
-        run: dotnet pack --configuration Release --version-suffix ${{ github.run_number }} --output nupkg
+        run: dotnet pack --configuration Release --version 1.0.${{ github.run_number }} --output nupkg
         
       - name: Push NuGet package to server
         run: dotnet nuget push nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
