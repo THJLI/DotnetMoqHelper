@@ -24,7 +24,7 @@ jobs:
       run: dotnet pack --configuration Release --no-build --output "$(pwd)/dist"
 
     - name: Publish NuGet Package
-      uses: nuget/Moq.Tools@v1
+      uses: nuget/nuget-packager-action@v1
       with:
         packagePath: "$(pwd)/dist/*.nupkg"
         apiKey: ${{ secrets.NUGET_API_KEY }}
