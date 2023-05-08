@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Moq;
+using System;
 
-namespace Moq.Tools.Interfaces
+namespace DotnetMoqHelper.Interfaces
 {
     public interface IMoqDependecy
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Moq.Tools.Extensions
+namespace DotnetMoqHelper.Extensions
 {
     public static class MoqToolExtensions
     {

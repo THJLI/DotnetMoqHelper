@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Moq.Tools.Interfaces;
+using DotnetMoqHelper.Interfaces;
 using NUnit.Framework;
 using System;
+using Moq;
 
-namespace Moq.Tools.Common
+namespace DotnetMoqHelper.Common
 {
     public abstract class MoqTestBase
     {

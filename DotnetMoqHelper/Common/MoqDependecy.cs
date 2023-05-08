@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Moq.Tools.Interfaces;
+using DotnetMoqHelper.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Moq;
 
-namespace Moq.Tools.Common
+namespace DotnetMoqHelper.Common
 {
     internal class MoqDependecy: IMoqDependecy
     {
