@@ -17,11 +17,8 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Set build number environment variable
-        run: export BUILD_NUMBER=${{ github.run_number }}
-
       - name: Build project and create NuGet package
-        run: dotnet pack --configuration Release --version-suffix $BUILD_NUMBER --output nupkg
+        run: dotnet pack --configuration Release --version-suffix ${{ github.run_number }} --output nupkg
         
       - name: Push NuGet package to server
         run: dotnet nuget push nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
