@@ -1,0 +1,31 @@
+name: Build and Publish NuGet Package
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build --output "$(pwd)/dist"
+
+    - name: Publish NuGet Package
+      uses: nuget/nuget-packager-action@v1
+      with:
+        packagePath: "$(pwd)/dist/*.nupkg"
+        apiKey: ${{ secrets.NUGET_API_KEY }}
+        nugetSource: https://api.nuget.org/v3/index.json
