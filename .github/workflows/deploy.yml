@@ -22,10 +22,11 @@ jobs:
 
     - name: Pack
       run: dotnet pack --configuration Release --no-build --output "$(pwd)/dist"
-
-    - name: Publish NuGet Package
-      uses: nuget/nuget-packager-action@v1
+    
+    - name: Nuget Package And Upload
+      uses: csharp-opensource/publish-nuget@master
       with:
-        packagePath: "$(pwd)/dist/*.nupkg"
-        apiKey: ${{ secrets.NUGET_API_KEY }}
+        releaseVersion: ${{ github.event.release.tag_name }}
+        repoUrl: ${{ github.server_url }}/${{ github.repository }}
+        nugetToken: ${{ secrets.NUGET_API_KEY }}
         nugetSource: https://api.nuget.org/v3/index.json
