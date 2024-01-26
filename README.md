@@ -1,12 +1,16 @@
 # DotnetMoqHelper
 This tool is an ideal solution for accelerating test development, offering a range of intuitive and powerful functionalities. With methods like ConfigureServices, AfterSetup, DepGet, AddMock, and ClearMock, MoqTestBase simplifies service configuration, test initialization, dependency management, and mock implementation. Aimed at making the testing process more agile and less prone to errors, this project is perfect for projects seeking efficiency and precision in unit testing. Whether it's to set up dynamic test services, manage mocks flexibly, or easily access injected dependencies, MoqTestBase is the ideal choice for developers looking to optimize their test workflow in C# environments using Moq and NUnit.
 
+# Key Features
 
-# MoqTestBase Class
+* Automated Testing Tools: Simplify your testing process with our automated tools, designed for modern Agile Software Testing practices.
+* Efficient Testing Practices: With MoqTestBase, experience a boost in your testing efficiency, saving time and resources.
+* Mock Management: Easy-to-use functionality for creating and managing mocks, enhancing the flexibility and robustness of your tests.
+* Dependency Injection Testing: Test components reliant on dependency injection effortlessly, ensuring comprehensive coverage.
+
+# Getting Started
 
 The `MoqTestBase` abstract class provides a common base for unit tests that use the Moq framework.
-
-## Features
 
 ### ConfigureServices
 
