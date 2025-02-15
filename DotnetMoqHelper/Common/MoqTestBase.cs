@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using DotnetMoqHelper.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using DotnetMoqHelper.Interfaces;
-using NUnit.Framework;
-using System;
 using Moq;
+using System;
+using System.Reflection;
 
 namespace DotnetMoqHelper.Common
 {
@@ -19,23 +19,23 @@ namespace DotnetMoqHelper.Common
         
         public abstract IConfiguration Configuration { get; }
 
-        [OneTimeSetUp]
-        protected void Setup()
+        public MoqTestBase()
         {
             if (Configuration is NotImplementedException || Configuration is null)
                 throw new ArgumentException(nameof(Configuration));
             
             _host = Host.CreateDefaultBuilder()
-                    .ConfigureAppConfiguration(o => o.AddConfiguration(Configuration))
+                    .ConfigureAppConfiguration(o => o.AddConfiguration(Configuration).AddEnvironmentVariables().AddUserSecrets(Assembly.GetEntryAssembly()))
                     .ConfigureServices(s =>
                     {
                         s.AddSingleton<IMoqDependecy, MoqDependecy>();
                         ConfigureServices(s);
                     })
                     .Build();
-
+            
             _moqDependecy = _host.Services.GetRequiredService<IMoqDependecy>();
             AfterSetup();
+            _host.Start();
         }
 
         public T DepGet<T>() where T : notnull
